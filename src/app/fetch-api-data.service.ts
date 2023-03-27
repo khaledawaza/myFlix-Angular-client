@@ -9,11 +9,11 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // Declaring API URL that will provide data for the client app
-const apiUrl = 'https://myflix-angular-client.onrender.com';
+const apiUrl = 'https://glittery-bublanina-54681f.netlify.app';
 @Injectable({ providedIn: 'root' })
 
 export class FetchApiDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Creates a new user // expects a JSON in the request body
   userRegistration(userDetails: any): Observable<any> {
