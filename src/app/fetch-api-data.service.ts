@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // Declaring API URL that will provide data for the client app
-const apiUrl = 'https://glittery-bublanina-54681f.netlify.app';
+const apiUrl = 'https://movie-api-m3ac.onrender.com';
 @Injectable({ providedIn: 'root' })
 
 export class FetchApiDataService {
