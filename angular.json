@@ -3,9 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myFlix-Angular-client": {
+    "favMovie-Angular-client": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,19 +17,20 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-flix-angular-client",
+            "outputPath": "dist/fav-movie-angular-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -60,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "myFlix-Angular-client:build:production"
+              "browserTarget": "favMovie-Angular-client:build:production"
             },
             "development": {
-              "browserTarget": "myFlix-Angular-client:build:development"
+              "browserTarget": "favMovie-Angular-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myFlix-Angular-client:build"
+            "browserTarget": "favMovie-Angular-client:build"
           }
         },
         "test": {
@@ -82,12 +87,13 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -96,6 +102,6 @@
     }
   },
   "cli": {
-    "analytics": "62e5ca7a-b9fe-4cc4-8fff-61d745ad18fd"
+    "analytics": "ca4ce604-9156-4909-91ae-2adee922041d"
   }
 }
