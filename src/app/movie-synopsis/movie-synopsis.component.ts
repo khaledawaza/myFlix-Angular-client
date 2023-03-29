@@ -3,18 +3,20 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 @Component({
-  selector: 'app-director-details',
-  templateUrl: './director-details.component.html',
-  styleUrls: ['./director-details.component.scss'],
+  selector: 'app-movie-synopsis',
+  templateUrl: './movie-synopsis.component.html',
+  styleUrls: ['./movie-synopsis.component.scss'],
 })
-export class DirectorDetailsComponent implements OnInit {
+export class MovieSynopsisComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      Name: string;
-      Bio: string;
-      Birth: string
+      Title: string;
+      Director: string;
+      Genre: string;
+      Description: string;
+      Image: string;
     }
   ) {}
   ngOnInit(): void {}

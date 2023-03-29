@@ -8,29 +8,48 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
+  selector: 'app-favorite-movie-card',
+  templateUrl: './favorite-movie-card.component.html',
+  styleUrls: ['./favorite-movie-card.component.scss'],
 })
-export class MovieCardComponent {
-  // we declare variable as an array of type any
-  // this variable will keep movies from API call (look getMovies())
+export class FavoriteMovieCardComponent {
   movies: any[] = [];
   favorites: any[] = [];
+  listOfFavoriteMovies: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {}
-
-  // After implementing the function getMovies it is being called ngOnInit lifecycle hook
-  // ngOnInit is called when Angular is done creating the component
   ngOnInit(): void {
     this.getMovies();
     this.getFavoriteMovies();
+    this.getListOfFavorite();
   }
 
+  async getListOfFavorite() {
+    let allMovies = await this.getMovies();
+    let favoriteMoviesID = await this.getFavoriteMovies()
+    console.log(allMovies);
+    console.log(favoriteMoviesID);
+    // this.listOfFavoriteMovies = this.movies.filter((m) => {
+    //   this.favorites.includes(m.id);
+    // });
+    // console.log(this.listOfFavoriteMovies);
+    // return this.listOfFavoriteMovies;
+  }
+
+  getMovies(): void {
+    // We make API call to get full list of movies
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      // we set movies variable to keep what we get as a response from API call
+      this.movies = resp;
+      console.log(this.movies);
+
+      return this.movies;
+    });
+  }
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -61,16 +80,6 @@ export class MovieCardComponent {
         duration: 4000,
       });
       this.ngOnInit();
-    });
-  }
-
-  getMovies(): void {
-    // We make API call to get full list of movies
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      // we set movies variable to keep what we get as a response from API call
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
     });
   }
 

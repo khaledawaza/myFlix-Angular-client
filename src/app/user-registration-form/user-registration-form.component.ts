@@ -1,39 +1,59 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';//Use this import to close the dialog on success
-import { FetchApiDataService } from '../fetch-api-data.service';//Import API call service
-import { MatSnackBar } from '@angular/material/snack-bar';//Display notification
 
+// You'll use this import to close the dialog on success
+import { MatDialogRef } from '@angular/material/dialog';
+// This import is used to display notifications back to the user
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// This import brings in the API calls
+import { FetchApiDataService } from '../fetch-api-data.service';
+
+// used the @Component decorator to tell Angular that the class right below is a component.
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.scss']
+  styleUrls: ['./user-registration-form.component.scss'],
 })
 
 export class UserRegistrationFormComponent implements OnInit {
-  
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };//Decorator
+  // The userData object will then be passed into the API call in the registerUser function.
+  @Input() userData = {
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: '',
+  };
 
+  // constructor is used to set dependencies. Constructor arguments then will be avaliable through "this" method
   constructor(
-    public fetchApiData: FetchApiDataService,
+    public FetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar
+  ) {}
 
-  ngOnInit(): void {} //OnInit method
+  // The ngOnInit method is called once the component has received all its inputs
+  // (all its data-bound properties) from the calling component (user)
+  ngOnInit(): void {}
 
+  // This is the function responsible for sending the form inputs to the backend API
   registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((response) => {
-  // Logic for a successful user registration goes here! (To be implemented)
-     this.dialogRef.close(); // Close dialog on success
-     console.log('registerUser() response1:', response);
-     this.snackBar.open('Registered successfully!', 'OK', {
-        duration: 4000
-     });
-    }, (response) => {
-      //Error response
-      console.log('registerUser() response2:', response);
-      this.snackBar.open(response, 'OK', {
-        duration: 4000
-      });
-    });
+    this.FetchApiData.userRegistration(this.userData).subscribe({
+      // if success, open snackBar to inform and close the login dialog,
+      next: (result) => {
+        // Logic for a successful user registration goes here! (To be implemented)
+        this.dialogRef.close(); // this will close the modal on success
+        console.log(result);
+        this.snackBar.open('User registered successfully!', 'OK', {
+          duration: 4000,
+        });
+      },
+      // if fail, open snackBar to show error message
+      error: (result) => {
+        this.snackBar.open(result, 'OK', { duration: 4000 });
+        console.log(result);
+      }
+    }
+      
+    );
   }
 }

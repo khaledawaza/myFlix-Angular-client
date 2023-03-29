@@ -1,8 +1,3 @@
-<app-nav-bar></app-nav-bar>
-<!-- *ngFor directive is being used to display all returned movies, where each movie is displayed in its own card
-operates like for loop
-"movies" refers to movies variable declared in the component file
-{{}} - intropolation is used to get the value of objects property and implement it into string -->
 <div style="display: flex;" class="movies-view">
     <mat-card *ngFor="let movie of movies; let i=index;">
         <mat-card-header>
