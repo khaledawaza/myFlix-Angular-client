@@ -1,23 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { FetchApiDataService } from '../fetch-api-data.service'
 
-import { MovieCardComponent } from './movie-card.component';
+@Component({
+  selector: 'app-movie-card',
+  templateUrl: './movie-card.component.html',
+  styleUrls: ['./movie-card.component.scss']
+})
+export class MovieCardComponent {
+  movies: any[] = [];
+  constructor(public fetchApiData: FetchApiDataService) { }
 
-describe('MovieCardComponent', () => {
-  let component: MovieCardComponent;
-  let fixture: ComponentFixture<MovieCardComponent>;
+ngOnInit(): void {
+  this.getMovies();
+}
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MovieCardComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(MovieCardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+getMovies(): void {
+  this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      console.log(this.movies);
+      return this.movies;
+    });
+  }
+}
