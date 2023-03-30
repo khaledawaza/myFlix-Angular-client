@@ -8,8 +8,6 @@ $boxShadow: 4px 1px 3px 5px rgba(255, 255, 255, 0.64);
 
 mat-card {
     background-color: $cardColor;
-    // border: 2px solid $boxShadowColor;
-
     color: $textColor;
     max-width: 500px;
     border: none !important;

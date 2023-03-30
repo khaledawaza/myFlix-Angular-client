@@ -13,8 +13,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent {
-  // we declare variable as an array of type any
-  // this variable will keep movies from API call (look getMovies())
   movies: any[] = [];
   favorites: any[] = [];
 
@@ -23,9 +21,6 @@ export class MovieCardComponent {
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {}
-
-  // After implementing the function getMovies it is being called ngOnInit lifecycle hook
-  // ngOnInit is called when Angular is done creating the component
   ngOnInit(): void {
     this.getMovies();
     this.getFavoriteMovies();
@@ -65,9 +60,7 @@ export class MovieCardComponent {
   }
 
   getMovies(): void {
-    // We make API call to get full list of movies
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      // we set movies variable to keep what we get as a response from API call
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
@@ -81,8 +74,7 @@ export class MovieCardComponent {
         Name: name,
         Description: description,
       },
-      // panelClass: 'genre-dialog-background',
-      // width: '400px',
+     
     });
   }
 

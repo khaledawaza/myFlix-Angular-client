@@ -33,17 +33,10 @@ export class FavoriteMovieCardComponent {
     let favoriteMoviesID = await this.getFavoriteMovies()
     console.log(allMovies);
     console.log(favoriteMoviesID);
-    // this.listOfFavoriteMovies = this.movies.filter((m) => {
-    //   this.favorites.includes(m.id);
-    // });
-    // console.log(this.listOfFavoriteMovies);
-    // return this.listOfFavoriteMovies;
   }
 
   getMovies(): void {
-    // We make API call to get full list of movies
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      // we set movies variable to keep what we get as a response from API call
       this.movies = resp;
       console.log(this.movies);
 
@@ -90,8 +83,6 @@ export class FavoriteMovieCardComponent {
         Name: name,
         Description: description,
       },
-      // panelClass: 'genre-dialog-background',
-      // width: '400px',
     });
   }
 

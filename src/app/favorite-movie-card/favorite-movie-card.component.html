@@ -6,7 +6,6 @@
         </mat-card-header>
 
         <img src={{movie.ImagePath}} alt="Poster for '{{movie.Title}}'" />
-        <!-- <mat-card-content>{{movie.Description}}</mat-card-content> -->
         <mat-card-actions>
             <div><button mat-button (click)="openGenreDetails(movie.Genre.Name, movie.Genre.Description)"
                     color="primary">Genre</button>

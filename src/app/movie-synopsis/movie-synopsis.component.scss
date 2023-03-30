@@ -8,8 +8,6 @@ $boxShadow: 4px 1px 3px 5px rgba(255, 255, 255, 0.64);
 
 mat-card {
     background-color: $cardColor;
-    // border: 2px solid $boxShadowColor;
-
     color: $textColor;
     max-width: 1500px;
     border: none !important;
@@ -42,14 +40,12 @@ mat-dialog-content {
     min-width: 100px;
     max-width: 300px;
     flex-shrink: 1;
-    //   object-fit: contain;
 }
 
 img {
     width: 100%;
     height: auto;
     max-width: 350px;
-    //   object-fit: contain;
 }
 
 mat-dialog-content div {
