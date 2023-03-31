@@ -28,6 +28,9 @@ export class FavoriteMovieCardComponent {
     this.getListOfFavorite();
   }
 
+  /**
+   * Get the list of all favorite movies 
+   */
   async getListOfFavorite() {
     let allMovies = await this.getMovies();
     let favoriteMoviesID = await this.getFavoriteMovies()
@@ -35,6 +38,9 @@ export class FavoriteMovieCardComponent {
     console.log(favoriteMoviesID);
   }
 
+  /**
+   * Get the list of all movies in the DB
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -43,6 +49,10 @@ export class FavoriteMovieCardComponent {
       return this.movies;
     });
   }
+
+  /**
+   * Get the list of user's favorite movies
+   */
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -54,6 +64,10 @@ export class FavoriteMovieCardComponent {
     return this.favorites.includes(id);
   }
 
+  /**
+   * Add a movie to favorites using movie id
+   * @param id unique movie id
+   */
   addToFavorites(id: string): void {
     console.log(id);
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
@@ -65,6 +79,10 @@ export class FavoriteMovieCardComponent {
     });
   }
 
+  /**
+   * Remove movie from favorites movie array  
+   * @param id movie unique id
+   */
   deleteFromFavorites(id: string): void {
     console.log(id);
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((result) => {
@@ -76,6 +94,11 @@ export class FavoriteMovieCardComponent {
     });
   }
 
+/**
+ * Toggle selected movie genre
+ * @param name name
+ * @param description description
+ */
   openGenreDetails(name: string, description: string): void {
     console.log(name);
     this.dialog.open(GenreDetailsComponent, {
@@ -86,6 +109,12 @@ export class FavoriteMovieCardComponent {
     });
   }
 
+  /**
+   * Function to show details of a director for the current movie
+   * @param name director name
+   * @param bio director bio
+   * @param birth date of birth
+   */
   openDirectorDetails(name: string, bio: string, birth: string): void {
     console.log(name);
     this.dialog.open(DirectorDetailsComponent, {
@@ -97,6 +126,15 @@ export class FavoriteMovieCardComponent {
     });
   }
 
+  /**
+   * Function to toggle movie synopsis
+   * @param title Title of the movei
+   * @param movieDirector Movie director
+   * @param movieGenre movie genre
+   * @param movieDescription movie description
+   * 
+   * @param movieImagePath image path
+   */
   openMovieSynopsis(
     title: string,
     movieDirector: string,

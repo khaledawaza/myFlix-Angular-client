@@ -19,5 +19,8 @@ export class MovieSynopsisComponent implements OnInit {
       Image: string;
     }
   ) {}
+  /**
+   * This function calls specified methods automatically straight after Component was mounted
+   */
   ngOnInit(): void {}
 }
