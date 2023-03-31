@@ -10,10 +10,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
+  // we declare variable as an object of type any
+  // this variable will keep user info from API call (look getUser())
+  /**
+   * This variables will receive and keep info from API calls bellow
+   * @user - keeps info about specific user
+   * @movies - keeps array of JSON objects (all movie avaliable in database)
+   * @favorites - keeps array of favorite movies of specific user
+   */
   user: any = {};
   movies: any[] = [];
   favorites: any[] = [];
-  
+
+  /**
+   * The updatedUser object will then be passed into the API call in the registerUser function.
+   * @userData object contains: @Username (required), @Password (required), @Email (required), @Birthday (optional)
+   */
   @Input() updatedUser = {
     Username: '',
     Password: '',
@@ -21,16 +33,30 @@ export class UserProfileComponent implements OnInit {
     Birthday: '',
   };
 
+  /**
+   * Constructor arguments then will be avaliable through "this" method
+   * @param fetchApiData to use functions to make API call
+   * @param router to navigate the user to welcome screen after deleting account
+   * @param snackBar to show the message, that user has successfuly loged in
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
     public snackBar: MatSnackBar
   ) {}
 
+  /**
+   * This function calls specified methods automatically straight after Component was mounted
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * This function makes an API call to get User info from database
+   * @function getUser
+   * @returns JSON object with user information
+   */
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       // we set user variable to keep what we get as a response from API call
@@ -43,6 +69,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * This function makes an API call to delete user data for the user that is logged in, redirects user to the welcome view
+   * @function deleteUser
+   */
   deleteUser(): void {
     if (
       confirm(
@@ -59,12 +89,15 @@ export class UserProfileComponent implements OnInit {
         );
       });
       this.fetchApiData.deleteUser().subscribe((result) => {
-        console.log(result);
         localStorage.clear();
       });
     }
   }
 
+  /**
+   * This function makes an API call to update user data, such as username, password, email, or birthday
+   * @function updateUserInfo
+   */
   updateUserData(): void {
     this.fetchApiData.updateUser(this.updatedUser).subscribe((result) => {
       console.log(result);
